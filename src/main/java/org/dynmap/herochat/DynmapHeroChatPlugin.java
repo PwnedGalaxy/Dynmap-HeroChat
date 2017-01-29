@@ -21,11 +21,11 @@ import org.dynmap.DynmapAPI;
 import org.dynmap.DynmapWebChatEvent;
 import org.dynmap.markers.MarkerAPI;
 
-import com.dthielke.herochat.Channel;
-import com.dthielke.herochat.ChannelChatEvent;
-import com.dthielke.herochat.ChannelManager;
-import com.dthielke.herochat.Chatter.Result;
-import com.dthielke.herochat.Herochat;
+import com.dthielke.api.Channel;
+import com.dthielke.api.event.ChannelChatEvent;
+import com.dthielke.channel.ChannelManager;
+import com.dthielke.api.ChatResult;
+import com.dthielke.Herochat;
 
 public class DynmapHeroChatPlugin extends JavaPlugin {
     private static Logger log;
@@ -70,8 +70,8 @@ public class DynmapHeroChatPlugin extends JavaPlugin {
         public void onHeroChatMessage(ChannelChatEvent event) {
             if(!enabled) return;
             String cname = event.getChannel().getName();
-            String pname = event.getSender().getName();
-            if(event.getResult() == Result.ALLOWED) {
+            String pname = event.getChatter().getName();
+            if(event.getResult() == ChatResult.ALLOWED) {
                 if(channel_to_web_list.contains(cname)) {
                     Player p = getServer().getPlayerExact(pname);
                     if(p != null) {
